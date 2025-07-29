@@ -16,33 +16,33 @@ export function Head(){
     )
 }
 
-export function Middle(){
+export function Middle(props){
     return(
         <>
             <div className='weather-card'>
                 <div className='main-content'>
                     <p>Wed, Jul 23</p>
                     <h3>Minneapolis, MN</h3>
-                    <h1>70°F</h1>
+                    <h1>{props.temp}°F</h1>
                     <h3>Cloudy</h3>
                 </div>
                 <div className='data'>
                     <div className='humidity'>
                         Humidity
                         <div>
-                            99%
+                            {props.humidity}%
                         </div>
                     </div>
                     <div className='visibility'>
                         Visibility
                         <div>
-                            8km
+                            {props.visibility}km
                         </div>
                     </div>
                     <div className='wind'>
                         Wind
                         <div>
-                            2mph
+                            {props.wind}mph
                         </div>
                     </div>
                 </div>
