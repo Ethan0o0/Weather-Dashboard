@@ -4,11 +4,14 @@ export function Head(){
     return(
         <>
             <div className="Top">
-                <h1 className='weather-logo'>Weather</h1>
+                <div className='topleftwithlogo'>
+                    <img src="../images/cloudy.png" alt="" id='main-logo' />
+                    <h1 className='weather'>Weather</h1>
+                </div>
                 <div className='top-buttons'>
-                    <h2>Today</h2>
-                    <h2>Tommorow</h2>
-                    <h2>Weekly</h2>
+                    <a href='' className='links'>Today</a>
+                    <a href='' className='links'>Tommorow</a>
+                    <a href='' className='links'>Weekly</a>
                 </div>
             </div>
             <input type="text" placeholder='Search Location' className='search-bar'/>
@@ -58,43 +61,31 @@ export function Bottom(){
         <>
             <div className='Bottom'>
                 <div className='time-icon'>
-                    12:00 PM
+                    Mon
                     <div>
                         70°F
                     </div>
                 </div>
                 <div className='time-icon'>
-                    2:00 PM
+                    Tues
                     <div>
                         70°F
                     </div>
                 </div>
                 <div className='time-icon'>
-                    4:00 PM
+                    Weds
                     <div>
                         70°F
                     </div>
                 </div>
                 <div className='time-icon'>
-                    6:00 PM
+                    Thurs
                     <div>
                         70°F
                     </div>
                 </div>
                 <div className='time-icon'>
-                    8:00 PM
-                    <div>
-                        70°F
-                    </div>
-                </div>
-                <div className='time-icon'>
-                    10:00 PM
-                    <div>
-                        70°F
-                    </div>
-                </div>
-                <div className='time-icon'>
-                    12:00 AM
+                    Fri
                     <div>
                         70°F
                     </div>
