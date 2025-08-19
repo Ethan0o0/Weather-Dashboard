@@ -1,12 +1,13 @@
 import './Components.css'
 
-export function Head(){
+export function Head(props){
     return(
         <>
             <div className="Top">
                 <div className='topleftwithlogo'>
                     <img src="../images/cloudy.png" alt="" id='main-logo' />
                     <h1 className='weather'>Weather</h1>
+                    <h3>{props.time}</h3>
                 </div>
                 <div className='top-buttons'>
                     <a href='' className='links'>Today</a>

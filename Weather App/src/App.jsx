@@ -1,11 +1,26 @@
 import './App.css'
 import { Head, Middle, Bottom } from './components.jsx'
 import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react'
 
 //pass the correct data as props into each section
 function App() {
 
+  const [currentTime, setCurrentTime] = useState("");
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString('en-US', {timeStyle: 'short'}));
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    }
+    
+  }, []);
+
+
+  //API FETCHING AND HANDLING
   const city = "minneapolis";
   const API_KEY = "3462feed519534b9a4777633611d6af2"
 
@@ -31,7 +46,13 @@ function App() {
     return <div className="error">Error: error fetching</div>
   }
 
-  // console.log(weatherdata.name);
+  //API ENDING
+
+  //GETTING THE TIME
+  // const now = new Date();
+  // const time = now.toLocaleTimeString('en-US', {timeStyle: 'short'});
+  // console.log(currentTime);
+
 
   //TODO
   //2. Display the data correctly
@@ -45,7 +66,9 @@ function App() {
 
   return (
     <>
-      <Head />
+      <Head 
+        time={currentTime}
+      />
       <Middle 
         temp={weatherdata.main.temp}
         humidity={weatherdata.main.humidity}
