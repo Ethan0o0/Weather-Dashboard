@@ -46,6 +46,19 @@ a:active{
     color: black;
 } */
 
+.slider-and-searchbar {
+    display: flex;
+    align-items: center;
+}
+
+#unit-switcher {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
 .search-bar {
     display: block;
     margin-left: auto;

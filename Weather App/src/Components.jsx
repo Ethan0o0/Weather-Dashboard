@@ -1,4 +1,5 @@
 import './Components.css'
+import './Slider.css'
 
 export function Head(props){
     return(
@@ -15,7 +16,17 @@ export function Head(props){
                     <a href='' className='links'>Weekly</a>
                 </div>
             </div>
-            <input type="text" placeholder='Search Location' className='search-bar'/>
+            <div className='slider-and-searchbar'>
+                <input type="text" placeholder='Search Location' className='search-bar'/>
+                <div id='unit-switcher'>
+                    F°
+                    <label className="switch">
+                        <input type="checkbox" checked={props.checked} onChange={props.change}/>
+                        <span className="slider round"></span>
+                    </label>
+                    C°
+                </div>
+            </div>
         </>
     )
 }
@@ -27,7 +38,7 @@ export function Middle(props){
                 <div className='main-content'>
                     <p>Wed, Jul 23</p>
                     <h3>Minneapolis, MN</h3>
-                    <h1>{props.temp}°F</h1>
+                    <h1>{props.temp}{props.unit ? "°C" : "°F"}</h1>
                     <h3>Cloudy</h3>
                 </div>
                 <div className='data'>
@@ -44,9 +55,9 @@ export function Middle(props){
                         </div>
                     </div>
                     <div className='wind'>
-                        Wind
+                        Wind Speed
                         <div>
-                            {props.wind}mph
+                            {props.wind}{props.unit ? "km/hr" : "mph"}
                         </div>
                     </div>
                 </div>

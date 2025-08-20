@@ -19,16 +19,36 @@ function App() {
     
   }, []);
 
+  const [unit, setUnit] = useState(true);
+
+  const [apiUnit, setApiUnit] = useState("imperial");
+
+  function unitSwitch(event){
+    // console.log(unit);
+    setUnit(event.target.checked)
+    // console.log(apiUnit);
+  }
+
+  useEffect(() => {
+    if (unit) {
+      setApiUnit("metric");
+    }
+    else {
+      setApiUnit("imperial");
+    }
+    console.log(apiUnit);
+  }, [unit])
+
 
   //API FETCHING AND HANDLING
   const city = "minneapolis";
   const API_KEY = "3462feed519534b9a4777633611d6af2"
 
   const {data: weatherdata, isLoading: weatherLoading, error: weatherError} = useQuery({
-    queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`).then(
+    queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${apiUnit}`).then(
       (res) => res.json()
     ),
-    queryKey: ['weatherdata'],
+    queryKey: ['weatherdata', apiUnit],
   });
 
   const {data: forecastdata, isLoading: forecastLoading, error: forecastError} = useQuery({
@@ -48,12 +68,6 @@ function App() {
 
   //API ENDING
 
-  //GETTING THE TIME
-  // const now = new Date();
-  // const time = now.toLocaleTimeString('en-US', {timeStyle: 'short'});
-  // console.log(currentTime);
-
-
   //TODO
   //2. Display the data correctly
   //3. Implement current time and location dynamic results
@@ -63,17 +77,29 @@ function App() {
   //7. Light and Dark Mode
   //8. Deploy
 
+  // function calcTime(){
+  //   const currTime = weatherdata.dt;
+  //   const tmrwTime = currTime + 86400;
+  //   forecastdata.list.main.dt = tmrwTime;
+  //   console.log(forecastdata.list.main);
+  // }
+
+  // calcTime();
+
 
   return (
     <>
       <Head 
         time={currentTime}
+        checked={unit}
+        change={unitSwitch}
       />
       <Middle 
         temp={weatherdata.main.temp}
         humidity={weatherdata.main.humidity}
         visibility={weatherdata.visibility}
         wind={weatherdata.wind.speed}
+        unit={unit}
       />
       <Bottom />
     </>
