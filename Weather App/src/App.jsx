@@ -1,7 +1,12 @@
 import './App.css'
-import { Head, Middle, Bottom } from './components.jsx'
+import './Components.css'
+import './Slider.css'
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react'
+import {HashRouter as Router, Routes, Route} from 'react-router-dom'
+import { Current } from './Pages/Current.jsx';
+import { Forecast } from './Pages/Forecast.jsx';
+import { Head } from './Components/Head.jsx';
 
 //pass the correct data as props into each section
 function App() {
@@ -69,40 +74,67 @@ function App() {
   //API ENDING
 
   //TODO
+  //1. Route the pages correctly by using route
   //2. Display the data correctly
   //3. Implement current time and location dynamic results
   //4. Implement searching feature
-  //5. Celsius -> Farenheight button vice versa
   //6. Do styling and loading screen/error screen
   //7. Light and Dark Mode
   //8. Deploy
 
-  // function calcTime(){
-  //   const currTime = weatherdata.dt;
-  //   const tmrwTime = currTime + 86400;
-  //   forecastdata.list.main.dt = tmrwTime;
-  //   console.log(forecastdata.list.main);
-  // }
+  const dates = []; //storing the dates in an array so that we can use it later
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  // dayNames[new Date(dates[0]).getDay()]
 
-  // calcTime();
+  function calcTime(){
+
+    const seenDates = new Set();
+    const desiredTime = "03:00:00";
+    const filteredForecast = [];
+    
+    forecastdata.list.forEach(item => {
+      const timeText = item.dt_txt;
+      const day = timeText.split(" ")[0];
+      const time = timeText.split(" ")[1];
+      if (!seenDates.has(day) && time === desiredTime){
+        seenDates.add(day);
+        filteredForecast.push(item);
+        dates.push(day);
+      }
+    })
+
+    return filteredForecast;
+  }
+
+  const testData = calcTime();
+  // console.log(dates[0]);
+  // console.log(new Date(dates[0]));
+  // console.log(testData);
+  //FIX THIS FIRST
 
 
   return (
-    <>
-      <Head 
-        time={currentTime}
-        checked={unit}
-        change={unitSwitch}
-      />
-      <Middle 
-        temp={weatherdata.main.temp}
-        humidity={weatherdata.main.humidity}
-        visibility={weatherdata.visibility}
-        wind={weatherdata.wind.speed}
-        unit={unit}
-      />
-      <Bottom />
-    </>
+    <Router>
+      <Routes>
+        <Route element={<Head 
+          time={currentTime}
+          checked={unit}
+          change={unitSwitch}
+        />}>
+          <Route path='/' element={<Current 
+            temp={weatherdata.main.temp}
+            humidity={weatherdata.main.humidity}
+            visibility={weatherdata.visibility}
+            wind={weatherdata.wind.speed}
+            unit={unit}
+          />}/>
+          <Route path='/forecast-5-day' element={<Forecast 
+            dates={dates}
+            dayNames={dayNames}
+          />}/>
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
