@@ -8,6 +8,7 @@ export function Current(props){
             visibility={props.visibility}
             wind={props.wind}
             unit={props.unit}
+            description={props.description}
         />
     )
 }

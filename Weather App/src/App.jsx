@@ -41,7 +41,7 @@ function App() {
     else {
       setApiUnit("imperial");
     }
-    console.log(apiUnit);
+    // console.log(apiUnit);
   }, [unit])
 
 
@@ -57,10 +57,10 @@ function App() {
   });
 
   const {data: forecastdata, isLoading: forecastLoading, error: forecastError} = useQuery({
-    queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`).then(
+    queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=${apiUnit}`).then(
       (res) => res.json()
     ),
-    queryKey: ['forecastdata'],
+    queryKey: ['forecastdata', apiUnit],
   });
 
   if (weatherLoading || forecastLoading){
@@ -74,7 +74,6 @@ function App() {
   //API ENDING
 
   //TODO
-  //1. Route the pages correctly by using route
   //2. Display the data correctly
   //3. Implement current time and location dynamic results
   //4. Implement searching feature
@@ -99,7 +98,7 @@ function App() {
       if (!seenDates.has(day) && time === desiredTime){
         seenDates.add(day);
         filteredForecast.push(item);
-        dates.push(day);
+        dates.push(timeText);
       }
     })
 
@@ -107,10 +106,9 @@ function App() {
   }
 
   const testData = calcTime();
-  // console.log(dates[0]);
-  // console.log(new Date(dates[0]));
-  // console.log(testData);
-  //FIX THIS FIRST
+
+  // console.log(weatherdata.weather[0].main)
+
 
 
   return (
@@ -127,10 +125,13 @@ function App() {
             visibility={weatherdata.visibility}
             wind={weatherdata.wind.speed}
             unit={unit}
+            description={weatherdata.weather[0].main}
           />}/>
           <Route path='/forecast-5-day' element={<Forecast 
             dates={dates}
             dayNames={dayNames}
+            mainData={testData}
+            unit={unit}
           />}/>
         </Route>
       </Routes>

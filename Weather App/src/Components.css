@@ -38,13 +38,6 @@ body {
     color: black;
 }
 
-/* a:link {
-    color: black;
-}
-
-a:active{
-    color: black;
-} */
 
 .slider-and-searchbar {
     display: flex;
@@ -89,20 +82,25 @@ a:active{
 .data {
     display: flex;
     gap: 100px;
-    margin-right: 25px;
+    margin-left: 20px;
 }
 
 .Bottom {
     display: flex;
     justify-content: center;
-    gap: 100px;
+    gap: 75px;
     margin-top: 50px;
+    height: 400px;
     text-align: center;
 }
 
-.time-icon {
+.five-day {
     /* background-color: skyblue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-image: linear-gradient(to top, #48CAE4, #EDF2FB);
     padding: 50px 75px;
     border-radius: 20px;
+    /* align-items: center; */
 }

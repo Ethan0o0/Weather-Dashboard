@@ -7,7 +7,7 @@ export function Middle(props){
                     <p>Wed, Jul 23</p>
                     <h3>Minneapolis, MN</h3>
                     <h1>{props.temp}{props.unit ? "°C" : "°F"}</h1>
-                    <h3>Cloudy</h3>
+                    <h3>{props.description}</h3>
                 </div>
                 <div className='data'>
                     <div className='humidity'>

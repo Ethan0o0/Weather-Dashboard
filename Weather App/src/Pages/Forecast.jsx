@@ -5,6 +5,8 @@ export function Forecast(props){
         <Fiveday 
             dates={props.dates}
             dayNames={props.dayNames}
+            mainData={props.mainData}
+            unit={props.unit}
         />
     )
 }
