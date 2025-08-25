@@ -5,7 +5,7 @@ export function Head(props){
         <>
             <div className="Top">
                 <div className='topleftwithlogo'>
-                    <img src="../images/cloudy.png" alt="" id='main-logo' />
+                    <img src="../images/cloudy.png" alt="cloud" id='main-logo' />
                     <h1 className='weather'>Weather</h1>
                     <h3>{props.time}</h3>
                 </div>
@@ -15,7 +15,9 @@ export function Head(props){
                 </div>
             </div>
             <div className='slider-and-searchbar'>
-                <input type="text" placeholder='Search Location' className='search-bar'/>
+                <form action={props.searchbar}>
+                    <input type="text" placeholder='Search Location' className='search-bar'name='searchbar' />
+                </form>
                 <div id='unit-switcher'>
                     F°
                     <label className="switch">

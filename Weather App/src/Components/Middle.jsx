@@ -4,8 +4,8 @@ export function Middle(props){
         <>
             <div className='weather-card'>
                 <div className='main-content'>
-                    <p>Wed, Jul 23</p>
-                    <h3>Minneapolis, MN</h3>
+                    <p>{props.currentDate}</p>
+                    <h3>{props.city}</h3>
                     <h1>{props.temp}{props.unit ? "°C" : "°F"}</h1>
                     <h3>{props.description}</h3>
                 </div>

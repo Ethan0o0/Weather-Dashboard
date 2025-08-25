@@ -1,0 +1,12 @@
+#loading-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 30px;
+}
+
+#loading {
+    width: 100px;
+    height: 100px;
+}

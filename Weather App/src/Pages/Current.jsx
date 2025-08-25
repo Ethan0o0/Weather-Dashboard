@@ -9,6 +9,8 @@ export function Current(props){
             wind={props.wind}
             unit={props.unit}
             description={props.description}
+            city={props.city}
+            currentDate = {props.currentDate}
         />
     )
 }

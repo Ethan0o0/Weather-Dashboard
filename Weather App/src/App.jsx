@@ -1,6 +1,7 @@
 import './App.css'
 import './Components.css'
 import './Slider.css'
+import './Loading.css'
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react'
 import {HashRouter as Router, Routes, Route} from 'react-router-dom'
@@ -28,6 +29,8 @@ function App() {
 
   const [apiUnit, setApiUnit] = useState("imperial");
 
+  const [city, setCity] = useState("Minneapolis");
+
   function unitSwitch(event){
     // console.log(unit);
     setUnit(event.target.checked)
@@ -46,25 +49,30 @@ function App() {
 
 
   //API FETCHING AND HANDLING
-  const city = "minneapolis";
+  // const city = "minneapolis";
   const API_KEY = "3462feed519534b9a4777633611d6af2"
 
   const {data: weatherdata, isLoading: weatherLoading, error: weatherError} = useQuery({
     queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${apiUnit}`).then(
       (res) => res.json()
     ),
-    queryKey: ['weatherdata', apiUnit],
+    queryKey: ['weatherdata', apiUnit, city],
   });
 
   const {data: forecastdata, isLoading: forecastLoading, error: forecastError} = useQuery({
     queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=${apiUnit}`).then(
       (res) => res.json()
     ),
-    queryKey: ['forecastdata', apiUnit],
+    queryKey: ['forecastdata', apiUnit, city],
   });
 
   if (weatherLoading || forecastLoading){
-    return <h2>Loading...</h2>;
+    return (<div id='loading-container'>
+              <img src="../images/loading.png" alt="loading-png" id='loading'/>
+              <img src="../images/loading.png" alt="loading-png" id='loading'/>
+              <img src="../images/loading.png" alt="loading-png" id='loading'/>
+            </div>
+    )
   }
 
   if (weatherError || forecastError) {
@@ -74,9 +82,6 @@ function App() {
   //API ENDING
 
   //TODO
-  //2. Display the data correctly
-  //3. Implement current time and location dynamic results
-  //4. Implement searching feature
   //6. Do styling and loading screen/error screen
   //7. Light and Dark Mode
   //8. Deploy
@@ -107,9 +112,15 @@ function App() {
 
   const testData = calcTime();
 
-  // console.log(weatherdata.weather[0].main)
+  function handleSearchBar(formData){
+    const newCity = formData.get("searchbar");
+    // console.log(city);
+    setCity(newCity);
+  }
 
-
+  // console.log(dayNames[new Date(forecastdata.list[0].dt_txt).getDay()]);
+  // console.log(new Date(forecastdata.list[0].dt_txt).toDateString());
+  const currentDate = new Date(forecastdata.list[0].dt_txt).toDateString().slice(0, -4);
 
   return (
     <Router>
@@ -118,6 +129,7 @@ function App() {
           time={currentTime}
           checked={unit}
           change={unitSwitch}
+          searchbar = {handleSearchBar}
         />}>
           <Route path='/' element={<Current 
             temp={weatherdata.main.temp}
@@ -126,6 +138,8 @@ function App() {
             wind={weatherdata.wind.speed}
             unit={unit}
             description={weatherdata.weather[0].main}
+            city={city}
+            currentDate = {currentDate}
           />}/>
           <Route path='/forecast-5-day' element={<Forecast 
             dates={dates}
