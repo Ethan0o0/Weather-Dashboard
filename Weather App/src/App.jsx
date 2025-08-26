@@ -50,7 +50,7 @@ function App() {
 
   //API FETCHING AND HANDLING
   // const city = "minneapolis";
-  const API_KEY = "3462feed519534b9a4777633611d6af2"
+  const API_KEY =  import.meta.env.VITE_API_KEY;
 
   const {data: weatherdata, isLoading: weatherLoading, error: weatherError} = useQuery({
     queryFn: () => fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${apiUnit}`).then(
