@@ -68,9 +68,9 @@ function App() {
 
   if (weatherLoading || forecastLoading){
     return (<div id='loading-container'>
-              <img src="../images/loading.png" alt="loading-png" id='loading'/>
-              <img src="../images/loading.png" alt="loading-png" id='loading'/>
-              <img src="../images/loading.png" alt="loading-png" id='loading'/>
+              <img src="../Public/images/loading.png" alt="loading-png" id='loading'/>
+              <img src="../Public/images/loading.png" alt="loading-png" id='loading'/>
+              <img src="../Public/images/loading.png" alt="loading-png" id='loading'/>
             </div>
     )
   }

@@ -5,7 +5,7 @@ export function Head(props){
         <>
             <div className="Top">
                 <div className='topleftwithlogo'>
-                    <img src="../images/cloudy.png" alt="cloud" id='main-logo' />
+                    <img src="../Public/images/cloudy.png" alt="cloud" id='main-logo' />
                     <h1 className='weather'>Weather</h1>
                     <h3>{props.time}</h3>
                 </div>
