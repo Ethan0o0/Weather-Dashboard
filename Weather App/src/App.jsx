@@ -75,8 +75,9 @@ function App() {
     )
   }
 
-  if (weatherError || forecastError) {
-    return <div className="error">Error: error fetching</div>
+  if (weatherError || forecastError || weatherdata.cod !== 200 ||
+    forecastdata.cod !== "200") {
+    return <div className="error">Error Recieved</div>
   }
 
   //API ENDING
@@ -118,8 +119,6 @@ function App() {
     setCity(newCity);
   }
 
-  // console.log(dayNames[new Date(forecastdata.list[0].dt_txt).getDay()]);
-  // console.log(new Date(forecastdata.list[0].dt_txt).toDateString());
   const currentDate = new Date(forecastdata.list[0].dt_txt).toDateString().slice(0, -4);
 
   return (
